@@ -34,8 +34,8 @@ module snap_joint(
         base_height = feather_base_height
         );
 
-    translate([0, height/2, 0])
-    cube([stick_width, height, material_z], center=true);
+    translate([0, height/2 - nothing, 0])
+    cube([stick_width, height + 2*nothing, material_z], center=true);
 }
 
 snap_joint();

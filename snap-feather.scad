@@ -1,6 +1,6 @@
 
-material_z = 3;
-nothing = 0.01;
+include <config.scad>;
+
 
 module snap_feather(
             width,
@@ -17,15 +17,15 @@ module snap_feather(
     {
         translate([
             width/2,
-            height/2,
+            (height-hook_height)/2 - nothing,
             0
             ])
         cube([
             width,
-            height,
+            height - hook_height + 2*nothing,
             material_z
             ], center=true);
-        
+
         leg_width = width/(2*leg_count-1);
         leg_height = height - hook_height - base_height;
         for (i=[1:leg_count-1])
@@ -44,31 +44,37 @@ module snap_feather(
     }
 
     // feather head
+    translate([0, height-hook_height, 0])
+    intersection()
+    {
+        translate([0, 0, -material_z/2])
+        cube([hook_width, hook_height, material_z]);
+        translate([hook_width, 0, 0])
+        scale([hook_width, hook_height, 1])
+        cylinder(r=1, h=material_z, center=true);
+    }
+
+    translate([hook_width, height-hook_height, -material_z/2])
+    cube([width-hook_width, hook_height, material_z]);
+
+    // hook at the feather head
     translate([
-        width + hook_width/2,
-        height - hook_height/2,
+        width,
+        height - hook_height,
         0
         ])
-    difference()
+    intersection()
     {
+        translate([hook_width/2, hook_height/2, 0])
         cube([
             hook_width,
             hook_height,
             material_z
             ], center=true);
-        
+
         // cut away a corner
-        translate([
-            hook_width/2,
-            hook_height/2,
-            0
-            ])
-        rotate(45)
-        cube([
-            hook_cutaway,
-            hook_cutaway,
-            material_z + 2*nothing
-            ], center=true);
+        scale([hook_width, hook_height, 1])
+        cylinder(r=1, h=material_z, center=true);
     }
 }
 
