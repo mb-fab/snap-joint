@@ -48,32 +48,10 @@ module snap_feather(
     intersection()
     {
         translate([0, 0, -material_z/2])
-        cube([hook_width, hook_height, material_z]);
-        translate([hook_width, 0, 0])
-        scale([hook_width, hook_height, 1])
-        cylinder(r=1, h=material_z, center=true);
-    }
+        cube([width+hook_width, hook_height, material_z]);
 
-    translate([hook_width, height-hook_height, -material_z/2])
-    cube([width-hook_width, hook_height, material_z]);
-
-    // hook at the feather head
-    translate([
-        width,
-        height - hook_height,
-        0
-        ])
-    intersection()
-    {
-        translate([hook_width/2, hook_height/2, 0])
-        cube([
-            hook_width,
-            hook_height,
-            material_z
-            ], center=true);
-
-        // cut away a corner
-        scale([hook_width, hook_height, 1])
+        translate([(width+hook_width)/2, 0, 0])
+        scale([(width+hook_width)/2, hook_height, 1])
         cylinder(r=1, h=material_z, center=true);
     }
 }

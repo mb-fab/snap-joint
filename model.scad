@@ -8,7 +8,7 @@ module test_joint()
     difference()
     {
         y = snap_joint_height - snap_joint_feather_hook_height - material_z;
-        d = 5;
+        d = 10;
         translate([0, y/2 - d/2, 0])
         cube([
             snap_joint_width + snap_joint_feather_hook_width + 10,

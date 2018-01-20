@@ -34,8 +34,18 @@ module snap_joint(
         base_height = feather_base_height
         );
 
-    translate([0, height/2 - nothing, 0])
-    cube([stick_width, height + 2*nothing, material_z], center=true);
+    translate([0, (height-feather_hook_height)/2 - nothing, 0])
+    cube([stick_width, height - feather_hook_height + 2*nothing, material_z], center=true);
+
+    translate([0, height-feather_hook_height, 0])
+    intersection()
+    {
+        translate([0, feather_hook_height/2, 0])
+        cube([stick_width, feather_hook_height, material_z], center=true);
+
+        scale([stick_width/2, feather_hook_height, 1])
+        cylinder(r=1, h=material_z, center=true);
+    }
 }
 
 snap_joint();

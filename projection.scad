@@ -5,6 +5,6 @@ projection()
 {
     test_joint();
 
-    translate([0, -22, 0])
+    translate([0, -18, 0])
     test_nut();
 }
