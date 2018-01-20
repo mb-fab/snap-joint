@@ -8,9 +8,8 @@ module snap_feather(
             hook_width,
             hook_height,
             hook_cutaway,
-            leg_width,
-            leg_count,
-            leg_offset
+            leg_count=3,
+            base_height
             )
 {
     // feather leg(s)
@@ -28,12 +27,12 @@ module snap_feather(
             ], center=true);
         
         leg_width = width/(2*leg_count-1);
-        leg_height = height - hook_height - leg_offset;
+        leg_height = height - hook_height - base_height;
         for (i=[1:leg_count-1])
         {
             translate([
                 leg_width/2 + (i*2-1)*leg_width,
-                leg_height/2 + leg_offset,
+                leg_height/2 + base_height,
                 0
                 ])
             cube([
@@ -81,5 +80,5 @@ snap_feather(
     hook_cutaway=4,
     leg_width=2,
     leg_count=3,
-    leg_offset=3
+    base_height=3
     );
