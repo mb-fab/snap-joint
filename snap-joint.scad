@@ -54,7 +54,7 @@ module snap_joint(
     // Fill inbetween the feathers
     fill_left_x = -width/2 + feather_width*1.2;
     fill_right_x = +width/2 - feather_width*1.2;
-    fill_height = snap_joint_height - feather_hook_height - material_z - nothing;
+    fill_height = height - feather_hook_height - material_z - nothing;
     linear_extrude(material_z, center=true)
     polygon([
         [fill_left_x, -nothing],
